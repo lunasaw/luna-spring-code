@@ -76,6 +76,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/** Cache of singleton factories: bean name to ObjectFactory. */
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
+	/** 早期单例对象的缓存:bean名称到bean实例。 */
 	/** Cache of early singleton objects: bean name to bean instance. */
 	private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 
@@ -190,7 +191,10 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					// objectFactory 初始化策略存储在 earlySingletonObjects，并且从 singletonFactories 移除
 					ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
 					if (singletonFactory != null) {
+						// 如果是FactoryBean工厂处理后返回的对象 直接getObject()获取实例对象
 						singletonObject = singletonFactory.getObject();
+						// 当一个单例 bean 被放入到这 early 单例缓存后，就要从 singletonFactories 中移除，
+						// 两者是互斥的，主要用来解决循环依赖的问题。
 						this.earlySingletonObjects.put(beanName, singletonObject);
 						this.singletonFactories.remove(beanName);
 					}

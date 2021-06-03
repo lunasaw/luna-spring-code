@@ -111,6 +111,8 @@ public abstract class FactoryBeanRegistrySupport extends DefaultSingletonBeanReg
 								// Temporarily return non-post-processed object, not storing it yet..
 								return object;
 							}
+							// 在两个方法是用来保存和移除类加载的状态，是用来对循环依赖进行检测的。
+							// 同时，这两个方法在不同 scope 加载 bean 时也有使用到，也是个高频方法。
 							// 单例操作，前置操作
 							beforeSingletonCreation(beanName);
 							try {

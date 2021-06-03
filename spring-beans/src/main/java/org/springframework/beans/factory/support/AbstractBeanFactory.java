@@ -1375,6 +1375,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
+	 * 为指定的 bean 定义解析 bean 类，将 bean 类名称解析为 Class 引用（如果需要）并将解析的 Class 存储在 bean 定义中以供进一步使用。
 	 * Resolve the bean class for the specified bean definition,
 	 * resolving a bean class name into a Class reference (if necessary)
 	 * and storing the resolved Class in the bean definition for further use.
@@ -1807,6 +1808,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
 	/**
+	 * 为给定的合并 bean 定义（和参数）创建一个 bean 实例。在子定义的情况下，bean 定义将已经与父定义合并。
 	 * Create a bean instance for the given merged bean definition (and arguments).
 	 * The bean definition will already have been merged with the parent definition
 	 * in case of a child definition.

@@ -528,15 +528,15 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				// 允许在上下文子类中对 bean工厂 进行后处理，要求在子类中实现该方法
+				// 允许在上下文 《子类》中对 bean工厂 进行后处理，要求在子类中实现该方法
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				// 注释 6.1  注册并执行 beanFactoryPostProcessor
+				// 注释 6.1  注册并执行 beanFactoryPostProcessor PostProcessor的工厂
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
-				// 注释 7.1 注册 beanPostProcessor 主体是 bean，这一步中没有执行，只是注册动作
+				// 注释 7.1 注册 beanPostProcessor 主体是 bean，这一步中没有执行，只是注册动作 PostProcessor工厂产生的实例
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
@@ -571,6 +571,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				}
 
 				// Destroy already created singletons to avoid dangling resources.
+				// 销毁已经创建的单例，以避免悬空资源。
 				destroyBeans();
 
 				// Reset 'active' flag.
